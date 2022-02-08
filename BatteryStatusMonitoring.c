@@ -2,8 +2,8 @@
 #include <string.h>
 #include "BatteryStatusMonitoring.h"
 
-char errorStatus[50] = "Out of specified range";
-char successStatus[50] = "Out of sepcified range";
+char errorStatus[50] = "Out of specified range: ";
+char successStatus[50] = "Battery in good condition";
 
 int checkIfParameterWithinSpecifiedRange(float parameterVal, float lowerThreshold, float upperThreshold) {
 	if (parameterVal < lowerThreshold || parameterVal > upperThreshold) {
@@ -27,7 +27,7 @@ int printStatusOnConsole(const char* statement) {
 void checkAndPrintStatus(int status, const char* batteryParameter) {
 	if (status == 0) {
 		char warningMessage[50];
-		strcpy(warningMessage, warning_message);
+		strcpy(warningMessage, errorStatus);
 		strcat(warningMessage, batteryParameter);
 		printStatusOnConsole(batteryParameter);
 	}
