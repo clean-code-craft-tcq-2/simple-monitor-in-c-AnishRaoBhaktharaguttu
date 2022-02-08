@@ -3,7 +3,7 @@
 #include "BatteryStatusMonitoring.h"
 
 void testCheckBatteryTemperature(float temp, int expStatus) {
-	assert(checkBatteryTemperature(temperature) == expStatus);
+	assert(checkBatteryTemperature(temp) == expStatus);
 }
 
 void testCheckBatteryChargeRate(float chargeRate, int expStatus){
