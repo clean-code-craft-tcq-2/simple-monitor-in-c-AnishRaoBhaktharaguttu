@@ -25,4 +25,10 @@ int main() {
  testCheckBatteryStateOfCharge(10, 0);
  testCheckBatteryStateOfCharge(85, 0);
  testCheckBatteryStateOfCharge(50,1);
+ testCheckBatteryChargeRate(0.92, 0);
+ testCheckBatteryChargeRate(0.53, 1);
+ testCheckBatteryCondition(60, 30, 0.72, 3);
+ testCheckBatteryCondition(90, 23, 0.7, 2);
+ testCheckBatteryCondition(95, 47, 0.61, 1);
+ testCheckBatteryCondition(85, 70, 0.92, 0);
 }
