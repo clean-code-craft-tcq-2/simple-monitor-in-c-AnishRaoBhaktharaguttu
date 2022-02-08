@@ -3,6 +3,8 @@
 #define LOW_THRESHOLD_BATT_SOC 20
 #define UPP_THRESHOLD_BATT_SOC 80
 #define UPP_THRESHOLD_BATT_CHARGE_RATE 0.8
+#define NUM_CHECKS 3
+#define RISK_LEVEL 2
 
 extern int checkBatteryTemperature(float temp);
 extern int checkBatteryStateOfCharge(float stateOfCharge);
