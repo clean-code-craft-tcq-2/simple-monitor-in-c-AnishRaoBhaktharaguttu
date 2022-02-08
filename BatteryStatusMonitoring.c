@@ -23,7 +23,7 @@ int printWarningMessage(const char* statement) {
 	return 0;
 }
 
-int checkStatusOfBattery(int status, const char* parameter) {
+int checkStatusOfBattery(int status, char* parameter) {
 	if (status == 0) {
 		strcat(parameter, ALERT_WARN_MSG);
 		printWarningMessage(statement);
