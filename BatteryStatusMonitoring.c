@@ -61,5 +61,5 @@ int checkBatteryCondition(float stateOfCharge, float temp, float chargeRate){
 	}else{
 		printStatusOnConsole(redStatus);
 	}
-	return status;	
+	return riskCounter;	
 }
