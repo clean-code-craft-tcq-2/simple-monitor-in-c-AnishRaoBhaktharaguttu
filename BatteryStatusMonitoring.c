@@ -35,6 +35,14 @@ int checkAndPrintStatus(int status, const char* batteryParameter) {
 	return status;
 }
 
+void checkAndPrintBatteryCondition(int riskCounter) {
+        if (riskCounter >= RISK_LEVEL){
+		printStatusOnConsole(yellowStatus);
+	}else{
+		printStatusOnConsole(redStatus);
+	}
+}
+
 int checkBatteryTemperature(float temp) {
 	int status = checkIfParameterWithinSpecifiedRange(temp, LOW_THRESHOLD_BATT_TEMP, UPP_THRESHOLD_BATT_TEMP);
 	return checkAndPrintStatus(status, "Battery Temperature");
@@ -50,13 +58,10 @@ int checkBatteryChargeRate(float chargeRate){
 	return checkAndPrintStatus(status, "Battery Charge Rate");
 }
 
+
 int checkBatteryCondition(float stateOfCharge, float temp, float chargeRate){
 	int riskCounter = 0;
 	riskCounter = (checkBatteryTemperature(temp)) + (checkBatteryStateOfCharge(stateOfCharge)) + (checkBatteryChargeRate(chargeRate));
-        if (riskCounter >= RISK_LEVEL){
-		printStatusOnConsole(yellowStatus);
-	}else{
-		printStatusOnConsole(redStatus);
-	}
+	checkAndPrintBatteryCondition(riskCounter);
 	return riskCounter;	
 }
