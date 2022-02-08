@@ -19,7 +19,7 @@ void testCheckBatteryCondition(float stateOfCharge, float temp, float chargeRate
 }
 
 int main() {
- testCheckBatteryTemperature(-25, 1);
- testCheckBatteryTemperature(50, 1);
+ testCheckBatteryTemperature(-25, 0);
+ testCheckBatteryTemperature(50, 0);
  testCheckBatteryTemperature(25, 1);
 }
