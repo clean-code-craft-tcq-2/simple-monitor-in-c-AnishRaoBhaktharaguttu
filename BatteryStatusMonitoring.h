@@ -8,4 +8,4 @@ extern int checkBatteryTemperature(float temp);
 extern int checkBatteryStateOfCharge(float stateOfCharge);
 extern int checkBatteryChargeRate(float chargeRate);
 extern int checkBatteryCondition(float stateOfCharge, float temperature, float chargeRate);
-extern int printWarningMessage (char*);
+extern int printWarningMessage (const char*);
