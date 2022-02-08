@@ -3,9 +3,8 @@
 #include "BatteryStatusMonitoring.h"
 
 char errorStatus[50] = "Out of specified range/limit: ";
-char greenStatus[50] = "Battery status is green and in good condition.";
-char yellowStatus[50] = "Battery status is yellow and in low risk";
-char redStatus[50] = "Battery status is red and high in risk";
+char yellowStatus[50] = "Battery is in low risk";
+char redStatus[50] = "Battery is in high risk";
 
 int checkIfParameterWithinSpecifiedRange(float parameterVal, float lowerThreshold, float upperThreshold) {
 	if (parameterVal < lowerThreshold || parameterVal > upperThreshold) {
@@ -54,9 +53,7 @@ int checkBatteryChargeRate(float chargeRate){
 int checkBatteryCondition(float stateOfCharge, float temp, float chargeRate){
 	int riskCounter = 0;
 	riskCounter = (checkBatteryTemperature(temp)) + (checkBatteryStateOfCharge(stateOfCharge)) + (checkBatteryChargeRate(chargeRate));
-	if (riskCounter == NUM_CHECKS){
-		printStatusOnConsole(greenStatus);
-	}else if (riskCounter <= RISK_LEVEL){
+        if (riskCounter >= RISK_LEVEL){
 		printStatusOnConsole(yellowStatus);
 	}else{
 		printStatusOnConsole(redStatus);
