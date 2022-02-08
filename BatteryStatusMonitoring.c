@@ -2,6 +2,8 @@
 #include <string.h>
 #include "BatteryStatusMonitoring.h"
 
+char ALERT_WARN_MSG[50] = "Out of sepcified range";
+
 int checkIfParameterWithinSpecifiedRange(float parameterVal, float lowerThreshold, float upperThreshold) {
 	if (parameterVal < lowerThreshold || parameterVal > upperThreshold) {
 		return 0;
