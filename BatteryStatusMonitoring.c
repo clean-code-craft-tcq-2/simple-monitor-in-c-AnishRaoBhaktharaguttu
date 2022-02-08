@@ -2,8 +2,6 @@
 #include <string.h>
 #include "BatteryStatusMonitoring.h"
 
-char alertString[100] = "Alert: Battery Status: Out of Range: ";
-
 int checkIfParameterWithinSpecifiedRange(float parameterVal, float lowerThreshold, float upperThreshold) {
 	if (parameterVal < lowerThreshold || parameterVal > upperThreshold) {
 		return 0;
@@ -18,7 +16,7 @@ int checkIfParameterWithinLimit(float parameterVal, float upperLimit) {
 	return 1;
 }
 
-int printWarningMessage(const char* statement) {
+int printWarningMessage(char* statement) {
 	printf("%s \n", statement);
 	return 0;
 }
