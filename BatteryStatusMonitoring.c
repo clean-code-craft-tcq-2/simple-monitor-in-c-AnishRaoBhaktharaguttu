@@ -18,12 +18,12 @@ int checkIfParameterWithinLimit(float parameterVal, float upperLimit) {
 	return 1;
 }
 
-int printWarningMessage(char* statement) {
+int printWarningMessage(const char* statement) {
 	printf("%s \n", statement);
 	return 0;
 }
 
-int checkStatusOfBattery(int status, char* parameter) {
+int checkStatusOfBattery(int status, const char* parameter) {
 	if (status == 0) {
 		strcat(parameter, ALERT_WARN_MSG);
 		printWarningMessage(parameter);
