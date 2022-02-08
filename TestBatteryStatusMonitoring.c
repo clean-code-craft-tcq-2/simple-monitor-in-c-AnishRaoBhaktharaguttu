@@ -22,4 +22,7 @@ int main() {
  testCheckBatteryTemperature(-25, 0);
  testCheckBatteryTemperature(50, 0);
  testCheckBatteryTemperature(25, 1);
+ testCheckBatteryStateOfCharge(10, 0);
+ testCheckBatteryStateOfCharge(85, 0);
+ testCheckBatteryStateOfCharge(50,1);
 }
