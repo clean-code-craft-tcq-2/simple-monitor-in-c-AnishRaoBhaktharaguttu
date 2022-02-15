@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdbool.h>
 #include "BatteryStatusMonitoring.h"
 
 // Enum which contains the various states of the parameter
@@ -32,17 +33,18 @@ int warnBatteryCondition(const char* parameter, int statusOfParameter) {
 }
 
 int checkIfParameterInWarningZone(ParameterOperatingStructure parameterOperatingStructure){
-         if(parameterOperatingStructure.ParameterValue > parameterOperatingStructure.LowerLimit && 
-	    parameterOperatingStructure.ParameterValue < parameterOperatingStructure.LowerWarningLimit){
-		 
+	if(checkIfParameterWithinSpecifiedRange(parameterOperatingStructure.ParameterValue, parameterOperatingStructure.LowerLimit,
+						parameterOperatingStructure.LowerWarningLimit)){
 	       return warnBatteryCondition(parameterOperatingStructure.ParameterName, LOW_WARNING_LIMIT);
-		 
-	 } else if(parameterOperatingStructure.ParameterValue > parameterOperatingStructure.LowerLimit && 
-	    parameterOperatingStructure.ParameterValue < parameterOperatingStructure.LowerWarningLimit){
-		 
+	 } else if(checkIfParameterWithinSpecifiedRange(parameterOperatingStructure.ParameterValue, parameterOperatingStructure.UpperWarningLimit,
+							parameterOperatingStructure.UpperLimit)){
 	       return warnBatteryCondition(parameterOperatingStructure.ParameterName, UPPER_WARNING_LIMIT);
 	 }
 	return 1;
+}
+
+bool checkIfParameterWithinSpecifiedRange(float value, float lowerLimit, float upperLimit){
+      return value > lowerLimit && value < upperLimit;
 }
 
 int checkIfParameterWithinToleranceRange(ParameterOperatingStructure parameterOperatingStructure, int statusOfParameterInCheck) {
