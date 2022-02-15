@@ -22,9 +22,9 @@ typedef struct {
 #define TOLERANCE_PERCENTAGE 0.05
 
 //Warning checks can be enabled/disabled here
-#define TEMP_WARNING_CHECK 0
-#define SOC_WARNING_CHECK 0
-#define CHARGE_RATE_WARNING_CHECK 0
+#define TEMP_WARNING_CHECK 1
+#define SOC_WARNING_CHECK 1
+#define CHARGE_RATE_WARNING_CHECK 1
 
 //Temperature tolerance
 #define TOLERANCE_BATT_TEMP (TOLERANCE_PERCENTAGE * UPP_THRESHOLD_BATT_TEMP)
