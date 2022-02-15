@@ -13,8 +13,8 @@ enum StatusOfParameter = {WITHIN_OPERATING_RANGE = 0,
 const char* warningMessages[] = {"Battery condition normal and within operating range",
 				 "Battery at Risk: Lower limit exceeded for ",
 				 "Battery at Risk: Upper limit exceeded for ",
-				 "Battery at Risk: Approaching the lower warning limit for ",
-				 "Battery at Risk: Approaching the upper warning limit for "
+				 "Battery abnormal: Approaching the lower warning limit for ",
+				 "Battery abnormal: Approaching the upper warning limit for "
 				 }
 
 ParameterOperatingStructure tempOperatingLimits;
@@ -24,27 +24,34 @@ void setWarningMessage(int StatusOfParameter statusOfParameter, char* warnMsg) {
 	strcat(warnMsg,  parameter);
 }
 
-void warnBatteryCondition(const char* parameter, int StatusOfParameter statusOfParameter) {
+int warnBatteryCondition(const char* parameter, int StatusOfParameter statusOfParameter) {
 	char warnMsg[100];
 	setWarningMessage(parameter, statusOfParameter, warnMsg);	
 	printStatusOnConsole(warnMsg);
+	return 0;
 }
 
 int checkIfParameterInWarningZone(ParameterOperatingStructure parameterOperatingStructure){
          if(parameterOperatingStructure.ParameterValue > parameterOperatingStructure.LowerLimit && 
 	    parameterOperatingStructure.ParameterValue < parameterOperatingStructure.LowerWarningLimit){
-	       warnBatteryCondition(parameterOperatingStructure.ParameterName, LOW_WARNING_LIMIT);
-	 } else if(
+		 
+	       return warnBatteryCondition(parameterOperatingStructure.ParameterName, LOW_WARNING_LIMIT);
+		 
+	 } else if(parameterOperatingStructure.ParameterValue > parameterOperatingStructure.LowerLimit && 
+	    parameterOperatingStructure.ParameterValue < parameterOperatingStructure.LowerWarningLimit){
+		 
+	       return warnBatteryCondition(parameterOperatingStructure.ParameterName, UPPER_WARNING_LIMIT);
+	 }
+	return 1;
 }
 
 int checkIfParameterWithinToleranceRange(ParameterOperatingStructure parameterOperatingStructure, int parameterStateChecked) {
 	if (parameterOperatingStructure.ParameterValue > parameterOperatingStructure.LowerWarningLimit 
 	    && parameterOperatingStructure.ParameterValue < parameterOperatingStructure.UpperWarningLimit){
-	         warnBatteryCondition(parameterOperatingStructure.ParameterName, parameterStateChecked);
-	}else{
-	    checkIfParameterInWarningZone(parameterOperatingStructure);
+	         return warnBatteryCondition(parameterOperatingStructure.ParameterName, parameterStateChecked);
+	}else {
+	         return checkIfParameterInWarningZone(parameterOperatingStructure);
 	}
-	return 0;
 }
 
 int checkIfParameterWithinLowerLimit(ParameterOperatingStructure paramOperatingStructure, int statusOfParameterInCheck) {
