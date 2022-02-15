@@ -3,6 +3,8 @@
 #include <stdbool.h>
 #include "BatteryStatusMonitoring.h"
 
+enum chosenLanguage language = English;
+
 // Enum which contains the various operational states of the parameter
 enum StatusOfParameter {WITHIN_OPERATING_RANGE = 0,
 			  LOW_LIMIT = 1,
@@ -12,11 +14,18 @@ enum StatusOfParameter {WITHIN_OPERATING_RANGE = 0,
 			  };
 
 //Warning messages for both breach and tolerance limits
-const char* warningMessages[] = {"Battery condition normal and within operating range",
+const char* warningMessagesEnglish[] = {"Battery condition normal and within operating range",
 				 "Battery at Risk: Lower limit exceeded for ",
 				 "Battery at Risk: Upper limit exceeded for ",
 				 "Battery abnormal: Approaching the lower warning limit for ",
 				 "Battery abnormal: Approaching the upper warning limit for "
+				 };
+
+const char* warningMessagesGerman[] = {"Batteriezustand normal und innerhalb des Betriebsbereichs",
+				 "Battery at Risk: Untergrenze überschritten für ",
+				 "Battery at Risk: Obergrenze überschritten für ",
+				 "Batterie abnormal: Annäherung an die untere Warngrenze für ",
+				 "Batterie abnormal: Annäherung an die obere Warngrenze für "
 				 };
 
 //Structures to hold information regarding the parameters - Temp, SoC, ChargeRate
@@ -29,7 +38,11 @@ void printStatusOnConsole(const char* statement) {
 }
 
 void setWarningMessage(const char* parameter, int statusOfParameter, char* warnMsg) {
-	strcpy(warnMsg, warningMessages[statusOfParameter]);
+       if(German){
+	strcpy(warnMsg, warningMessagesEnglish[statusOfParameter]);
+       } else{
+	strcpy(warnMsg, warningMessagesGerman[statusOfParameter]);
+       }
 	strcat(warnMsg,  parameter);
 }
 
