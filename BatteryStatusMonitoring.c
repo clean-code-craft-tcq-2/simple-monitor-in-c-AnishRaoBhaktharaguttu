@@ -32,6 +32,10 @@ int warnBatteryCondition(const char* parameter, int statusOfParameter) {
 	return 0;
 }
 
+bool checkIfParameterWithinSpecifiedRange(float value, float lowerLimit, float upperLimit){
+      return value > lowerLimit && value < upperLimit;
+}
+
 int checkIfParameterInWarningZone(ParameterOperatingStructure parameterOperatingStructure){
 	if(checkIfParameterWithinSpecifiedRange(parameterOperatingStructure.ParameterValue, parameterOperatingStructure.LowerLimit,
 						parameterOperatingStructure.LowerWarningLimit)){
@@ -41,10 +45,6 @@ int checkIfParameterInWarningZone(ParameterOperatingStructure parameterOperating
 	       return warnBatteryCondition(parameterOperatingStructure.ParameterName, UPPER_WARNING_LIMIT);
 	 }
 	return 1;
-}
-
-bool checkIfParameterWithinSpecifiedRange(float value, float lowerLimit, float upperLimit){
-      return value > lowerLimit && value < upperLimit;
 }
 
 int checkIfParameterWithinToleranceRange(ParameterOperatingStructure parameterOperatingStructure, int statusOfParameterInCheck) {
