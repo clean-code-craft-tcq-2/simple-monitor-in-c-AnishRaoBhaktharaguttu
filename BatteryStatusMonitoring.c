@@ -3,7 +3,7 @@
 #include "BatteryStatusMonitoring.h"
 
 // Enum which contains the various states of the parameter
-enum StatusOfParameter = {WITHIN_OPERATING_RANGE = 0,
+enum StatusOfParameter {WITHIN_OPERATING_RANGE = 0,
 			  LOW_LIMIT = 1,
 			  UPPER_LIMIT = 2,
 			  LOW_WARNING_LIMIT = 3,
@@ -19,12 +19,12 @@ const char* warningMessages[] = {"Battery condition normal and within operating 
 
 ParameterOperatingStructure tempOperatingLimits;
 
-void setWarningMessage(int StatusOfParameter statusOfParameter, char* warnMsg) {
+void setWarningMessage(int statusOfParameter, char* warnMsg) {
 	strcpy(warnMsg, warningMessages[statusOfParameter]);
 	strcat(warnMsg,  parameter);
 }
 
-int warnBatteryCondition(const char* parameter, int StatusOfParameter statusOfParameter) {
+int warnBatteryCondition(const char* parameter, int statusOfParameter) {
 	char warnMsg[100];
 	setWarningMessage(parameter, statusOfParameter, warnMsg);	
 	printStatusOnConsole(warnMsg);
@@ -55,16 +55,16 @@ int checkIfParameterWithinToleranceRange(ParameterOperatingStructure parameterOp
 }
 
 int checkIfParameterWithinLowerLimit(ParameterOperatingStructure paramOperatingStructure, int statusOfParameterInCheck) {
-	if (paramOperatingStructure.ParameterVal  > paramOperatingStructure.LowerLimit) {
-		warnBatteryCondition(parameterOperatingStructure.ParameterName, statusOfParameterInCheck);
+	if (paramOperatingStructure.ParameterValue  > paramOperatingStructure.LowerLimit) {
+		warnBatteryCondition(paramOperatingStructure.ParameterName, statusOfParameterInCheck);
 		return 0;
 	}
 	return 1;
 }
 
 int checkIfParameterWithinUpperLimit(ParameterOperatingStructure paramOperatingStructure, int statusOfParameterInCheck) {
-	if (paramOperatingStructure.ParameterVal  > paramOperatingStructure.UpperLimit) {
-		warnBatteryCondition(parameterOperatingStructure.ParameterName, statusOfParameterInCheck);
+	if (paramOperatingStructure.ParameterValue  > paramOperatingStructure.UpperLimit) {
+		warnBatteryCondition(paramOperatingStructure.ParameterName, statusOfParameterInCheck);
 		return 0;
 	}
 	return 1;
@@ -101,7 +101,7 @@ void setupParameterOperatingStructure(ParameterOperatingStructure paramOperating
 
 int checkBatteryCondition(float stateOfCharge, float temp, float chargeRate){
 	setupParameterOperatingStructure(tempOperatingLimits, temp, LOW_THRESHOLD_BATT_TEMP, UPP_THRESHOLD_BATT_TEMP, 
-					 LOW_TOLERANCE_BATT_TEMP, HIGH_TOLERANCE_BATT_TEMP, "Temperature" TEMP_WARNING_CHECK);
+					 LOW_TOLERANCE_BATT_TEMP, HIGH_TOLERANCE_BATT_TEMP, "Temperature", TEMP_WARNING_CHECK);
 	int batteryStatus =  (checkStatusOfParameter(tempOperatingLimits));
 	return batteryStatus;	
 }
