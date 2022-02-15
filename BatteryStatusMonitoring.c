@@ -104,7 +104,7 @@ int checkStatusOfParameter(ParameterOperatingStructure paramOperatingStructure, 
 }
 
 //Sets up the structure for the corresponding parameter with all necessary attributes
-ParameterOperatingStructure setupParameterOperatingStructure(ParameterOperatingStructure paramOperatingStructure, float parameterValue, float lowerLimit, float upperLimit,
+ParameterOperatingStructure setupParameterOperatingStructure(float parameterValue, float lowerLimit, float upperLimit,
 				      float lowWarningLimit, float upperWarningLimit, const char* parameter, int warningCheck){
        ParameterOperatingStructure paramOperatingStructure;
        paramOperatingStructure.ParameterValue = parameterValue;
