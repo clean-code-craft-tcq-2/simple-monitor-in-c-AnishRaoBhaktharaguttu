@@ -51,7 +51,7 @@ int checkIfParameterWithinSpecifiedRange(float value, float lowerLimit, float up
 }
 
 int checkIfParameterWithinLowerLimit(ParameterOperatingStructure paramOperatingStructure, int statusOfParameterInCheck, enum chosenLanguage language) {
-	if (paramOperatingStructure.ParameterValue  > paramOperatingStructure.LowerLimit) {
+	if (paramOperatingStructure.ParameterValue  < paramOperatingStructure.LowerLimit) {
 		return warnBatteryCondition(paramOperatingStructure.ParameterName, statusOfParameterInCheck, language);
 	}
 	return 1;
