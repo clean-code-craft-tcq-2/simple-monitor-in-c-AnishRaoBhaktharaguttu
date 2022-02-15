@@ -77,15 +77,16 @@ void printStatusOnConsole(const char* statement) {
 }
 
 int checkStatusOfParameter(ParameterOperatingStructure paramOperatingStructure) {
+	return checkIfParameterWithinUpperLimit(paramOperatingStructure, UPPER_LIMIT) &&
+		checkIfParameterWithinLowerLimit(paramOperatingStructure, LOW_LIMIT) &&
+		checkForWarning(paramOperatingStructure);
+}
+
+int checkForWarning(ParameterOperatingStructure paramOperatingStructure){
 	int parameterStatus;
-	parameterStatus = checkIfParameterWithinUpperLimit(paramOperatingStructure, UPPER_LIMIT) &&
-		checkIfParameterWithinLowerLimit(paramOperatingStructure, LOW_LIMIT);
-        
 	if(paramOperatingStructure.WarningCheck==1) {
 		parameterStatus = parameterStatus && checkIfParameterWithinToleranceRange(paramOperatingStructure, WITHIN_OPERATING_RANGE);
 	}
-	
-
 	return parameterStatus;
 }
 
