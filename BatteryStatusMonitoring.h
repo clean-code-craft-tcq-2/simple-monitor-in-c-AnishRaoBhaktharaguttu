@@ -41,5 +41,5 @@ typedef struct {
 #define HIGH_TOLERANCE_BATT_CHARGE_RATE (UPP_THRESHOLD_BATT_CHARGE_RATE - TOLERANCE_BATT_CHARGE_RATE)
 #define LOW_TOLERANCE_BATT_CHARGE_RATE (LOW_THRESHOLD_BATT_CHARGE_RATE + TOLERANCE_BATT_CHARGE_RATE)
 
-extern int checkBatteryCondition(float stateOfCharge, float temp, float chargeRate);
+extern int checkBatteryCondition(float stateOfCharge, float temp, float chargeRate, enum chosenLanguage language);
 void printStatusOnConsole(const char* statement);
