@@ -80,7 +80,7 @@ int checkStatusOfParameter(ParameterOperatingStructure paramOperatingStructure) 
 		checkIfParameterWithinLowerLimit(paramOperatingStructure, LOW_LIMIT);
         
 	if(paramOperatingStructure.WarningCheck==1) {
-		parameterStatus = parameterStatus && checkIfParameterWithinToleranceRange(ParameterOperatingStructure paramOperatingStructure, WITHIN_OPERATING_RANGE);
+		parameterStatus = parameterStatus && checkIfParameterWithinToleranceRange(paramOperatingStructure, WITHIN_OPERATING_RANGE);
 	}
 	
 
