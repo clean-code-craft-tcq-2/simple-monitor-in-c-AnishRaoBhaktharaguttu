@@ -5,6 +5,8 @@
 #define UPP_THRESHOLD_BATT_CHARGE_RATE 0.8
 #define LOW_THRESHOLD_BATT_CHARGE_RATE 0.5
 
+enum chosenLanguage{English, German};
+
 //Define the Parameter Operating Structure
 typedef struct {
   float ParameterValue;
@@ -17,9 +19,9 @@ typedef struct {
 } ParameterOperatingStructure;
 
 //Tolerance levels
-#define TOLERANCE_PERCENTAGE 0.05
+#define TOLERANCE_PERCENTAGE 0.04
 
-//Warning checks enabled/disabled
+//Warning checks can be enabled/disabled here
 #define TEMP_WARNING_CHECK 1
 #define SOC_WARNING_CHECK 1
 #define CHARGE_RATE_WARNING_CHECK 1
