@@ -16,6 +16,6 @@ int main() {
 	testCheckBatteryCondition(23, 78, 0.67, English, 0);
 	testCheckBatteryCondition(21, 22, 0.59, English, 0);
 	testCheckBatteryCondition(22, 10, 0.52, German, 0);
-	testCheckBatteryCondition(21, 45, 0.91, English, 0);
+	testCheckBatteryCondition(21, 45, 0.91, German, 0);
 	testCheckBatteryCondition(25, 45, 0.01, German, 0);
 }
