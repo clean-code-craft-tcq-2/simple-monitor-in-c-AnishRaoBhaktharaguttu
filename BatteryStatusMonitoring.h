@@ -7,13 +7,13 @@
 
 //Define the Parameter Operating Structure
 typedef struct {
-	float ParameterValue;
+  float ParameterValue;
   float LowerLimit;
   float UpperLimit;
   float LowerWarningLimit;
   float UpperWarningLimit;
   int WarningCheck;
-	char ParameterName[10];
+  const char* ParameterName;
 } ParameterOperatingStructure;
 
 //Tolerance levels
