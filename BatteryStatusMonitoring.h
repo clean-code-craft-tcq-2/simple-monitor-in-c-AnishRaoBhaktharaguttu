@@ -5,7 +5,7 @@
 #define UPP_THRESHOLD_BATT_CHARGE_RATE 0.8
 #define LOW_THRESHOLD_BATT_CHARGE_RATE 0.5
 
-enum chosenLanguage{English, German};
+enum chosenLanguage{English = 0, German};
 
 //Define the Parameter Operating Structure
 typedef struct {
