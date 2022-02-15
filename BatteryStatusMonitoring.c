@@ -21,6 +21,8 @@ const char* warningMessages[] = {"Battery condition normal and within operating 
 
 //Structures to hold information regarding the parameters - Temp, SoC, ChargeRate
 ParameterOperatingStructure tempOperatingLimits;
+ParameterOperatingStructure socOperatingLimits;
+ParameterOperatingStructure chargeRateOperatingLimits;
 
 void printStatusOnConsole(const char* statement) {
 	printf("%s \n", statement);
@@ -111,6 +113,10 @@ void setupParameterOperatingStructure(ParameterOperatingStructure paramOperating
 int checkBatteryCondition(float stateOfCharge, float temp, float chargeRate){
 	setupParameterOperatingStructure(tempOperatingLimits, temp, LOW_THRESHOLD_BATT_TEMP, UPP_THRESHOLD_BATT_TEMP, 
 					 LOW_TOLERANCE_BATT_TEMP, HIGH_TOLERANCE_BATT_TEMP, "Temperature", TEMP_WARNING_CHECK);
-	int batteryStatus =  (checkStatusOfParameter(tempOperatingLimits));
+	setupParameterOperatingStructure(socOperatingLimits, stateOfCharge, LOW_THRESHOLD_BATT_SOC , UPP_THRESHOLD_BATT_SOC , 
+					 LOW_TOLERANCE_BATT_SOC, HIGH_TOLERANCE_BATT_SOC, "State of Charge", SOC_WARNING_CHECK);
+	setupParameterOperatingStructure(chargeRateOperatingLimits, chargeRate, LOW_THRESHOLD_BATT_CHARGE_RATE, UPP_THRESHOLD_BATT_CHARGE_RATE, 
+					 LOW_TOLERANCE_BATT_CHARGE_RATE, HIGH_TOLERANCE_BATT_CHARGE_RATE, "Charge Rate", CHARGE_RATE_WARNING_CHECK);
+	int batteryStatus =  (checkStatusOfParameter(tempOperatingLimits) && checkStatusOfParameter(socOperatingLimits) && checkStatusOfParameter(chargeRateOperatingLimits));
 	return batteryStatus;	
 }
