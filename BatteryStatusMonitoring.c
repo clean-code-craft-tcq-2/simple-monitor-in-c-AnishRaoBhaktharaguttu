@@ -26,11 +26,6 @@ const char* warningMessagesGerman[] = {"Batteriezustand normal und innerhalb des
 				 "Batterie abnormal: Annäherung an die obere Warngrenze für "
 				 };
 
-//Structures to hold information regarding the parameters - Temp, SoC, ChargeRate
-ParameterOperatingStructure tempOperatingLimits;
-ParameterOperatingStructure socOperatingLimits;
-ParameterOperatingStructure chargeRateOperatingLimits;
-
 void printStatusOnConsole(const char* statement) {
 	printf("%s \n", statement);
 }
@@ -109,8 +104,9 @@ int checkStatusOfParameter(ParameterOperatingStructure paramOperatingStructure, 
 }
 
 //Sets up the structure for the corresponding parameter with all necessary attributes
-void setupParameterOperatingStructure(ParameterOperatingStructure paramOperatingStructure, float parameterValue, float lowerLimit, float upperLimit,
+ParameterOperatingStructure setupParameterOperatingStructure(ParameterOperatingStructure paramOperatingStructure, float parameterValue, float lowerLimit, float upperLimit,
 				      float lowWarningLimit, float upperWarningLimit, const char* parameter, int warningCheck){
+       ParameterOperatingStructure paramOperatingStructure;
        paramOperatingStructure.ParameterValue = parameterValue;
        paramOperatingStructure.LowerLimit = lowerLimit;
        paramOperatingStructure.UpperLimit = upperLimit;
@@ -118,15 +114,16 @@ void setupParameterOperatingStructure(ParameterOperatingStructure paramOperating
        paramOperatingStructure.UpperWarningLimit = upperWarningLimit;
        paramOperatingStructure.ParameterName = parameter;
        paramOperatingStructure.WarningCheck = warningCheck;
+       return paramOperatingStructure;
 }
 
 //Checks the overall battery condition
 int checkBatteryCondition(float stateOfCharge, float temp, float chargeRate, enum chosenLanguage language){
-	setupParameterOperatingStructure(tempOperatingLimits, temp, LOW_THRESHOLD_BATT_TEMP, UPP_THRESHOLD_BATT_TEMP, 
+	ParameterOperatingStructure tempOperatingLimits = setupParameterOperatingStructure(temp, LOW_THRESHOLD_BATT_TEMP, UPP_THRESHOLD_BATT_TEMP, 
 					 LOW_TOLERANCE_BATT_TEMP, HIGH_TOLERANCE_BATT_TEMP, "Temperature", TEMP_WARNING_CHECK);
-	setupParameterOperatingStructure(socOperatingLimits, stateOfCharge, LOW_THRESHOLD_BATT_SOC , UPP_THRESHOLD_BATT_SOC , 
+	ParameterOperatingStructure socOperatingLimits = setupParameterOperatingStructure(stateOfCharge, LOW_THRESHOLD_BATT_SOC , UPP_THRESHOLD_BATT_SOC , 
 					 LOW_TOLERANCE_BATT_SOC, HIGH_TOLERANCE_BATT_SOC, "State of Charge", SOC_WARNING_CHECK);
-	setupParameterOperatingStructure(chargeRateOperatingLimits, chargeRate, LOW_THRESHOLD_BATT_CHARGE_RATE, UPP_THRESHOLD_BATT_CHARGE_RATE, 
+	ParameterOperatingStructure chargeRateOperatingLimits = setupParameterOperatingStructure(chargeRate, LOW_THRESHOLD_BATT_CHARGE_RATE, UPP_THRESHOLD_BATT_CHARGE_RATE, 
 					 LOW_TOLERANCE_BATT_CHARGE_RATE, HIGH_TOLERANCE_BATT_CHARGE_RATE, "Charge Rate", CHARGE_RATE_WARNING_CHECK);
 	int batteryStatus =  (checkStatusOfParameter(tempOperatingLimits, language) && checkStatusOfParameter(socOperatingLimits, language)
 			      && checkStatusOfParameter(chargeRateOperatingLimits, language));
