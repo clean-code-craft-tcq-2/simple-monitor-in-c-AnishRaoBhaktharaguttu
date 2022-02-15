@@ -15,11 +15,11 @@ const char* warningMessages[] = {"Battery condition normal and within operating 
 				 "Battery at Risk: Upper limit exceeded for ",
 				 "Battery abnormal: Approaching the lower warning limit for ",
 				 "Battery abnormal: Approaching the upper warning limit for "
-				 }
+				 };
 
 ParameterOperatingStructure tempOperatingLimits;
 
-void setWarningMessage(int statusOfParameter, char* warnMsg) {
+void setWarningMessage(const char* parameter, int statusOfParameter, char* warnMsg) {
 	strcpy(warnMsg, warningMessages[statusOfParameter]);
 	strcat(warnMsg,  parameter);
 }
@@ -45,10 +45,10 @@ int checkIfParameterInWarningZone(ParameterOperatingStructure parameterOperating
 	return 1;
 }
 
-int checkIfParameterWithinToleranceRange(ParameterOperatingStructure parameterOperatingStructure, int parameterStateChecked) {
+int checkIfParameterWithinToleranceRange(ParameterOperatingStructure parameterOperatingStructure, int statusOfParameterInCheck) {
 	if (parameterOperatingStructure.ParameterValue > parameterOperatingStructure.LowerWarningLimit 
 	    && parameterOperatingStructure.ParameterValue < parameterOperatingStructure.UpperWarningLimit){
-	         return warnBatteryCondition(parameterOperatingStructure.ParameterName, parameterStateChecked);
+	         return warnBatteryCondition(parameterOperatingStructure.ParameterName, statusOfParameterInCheck);
 	}else {
 	         return checkIfParameterInWarningZone(parameterOperatingStructure);
 	}
