@@ -70,9 +70,8 @@ int checkIfParameterWithinUpperLimit(ParameterOperatingStructure paramOperatingS
 	return 1;
 }
 
-int printStatusOnConsole(const char* statement) {
+void printStatusOnConsole(const char* statement) {
 	printf("%s \n", statement);
-	return 0;
 }
 
 int checkStatusOfParameter(ParameterOperatingStructure paramOperatingStructure) {
@@ -81,7 +80,7 @@ int checkStatusOfParameter(ParameterOperatingStructure paramOperatingStructure) 
 		checkIfParameterWithinLowerLimit(paramOperatingStructure, LOW_LIMIT);
         
 	if(paramOperatingStructure.WarningCheck==1) {
-		parameterStatus = parameterStatus && checkIfParameterWithinToleranceRange(paramOperatingStructure.ParameterValue, WITHIN_OPERATING_RANGE)
+		parameterStatus = parameterStatus && checkIfParameterWithinToleranceRange(ParameterOperatingStructure paramOperatingStructure, WITHIN_OPERATING_RANGE);
 	}
 	
 
@@ -90,7 +89,7 @@ int checkStatusOfParameter(ParameterOperatingStructure paramOperatingStructure) 
 
 void setupParameterOperatingStructure(ParameterOperatingStructure paramOperatingStructure, float parameterValue, float lowerLimit, float upperLimit,
 				      float lowWarningLimit, float upperWarningLimit, const char* parameter, int warningCheck){
-       paramOperatingStructure.ParameterValue = temperatureValue;
+       paramOperatingStructure.ParameterValue = parameterValue;
        paramOperatingStructure.LowerLimit = lowerLimit;
        paramOperatingStructure.UpperLimit = upperLimit;
        paramOperatingStructure.LowerWarningLimit = lowWarningLimit;
