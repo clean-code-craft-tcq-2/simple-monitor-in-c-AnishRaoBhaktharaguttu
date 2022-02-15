@@ -27,11 +27,5 @@ typedef struct {
 #define HIGH_TOLERANCE_BATT_TEMP (UPP_THRESHOLD_BATT_TEMP - TOLERANCE_BATT_TEMP)
 #define LOW_TOLERANCE_BATT_TEMP (LOW_THRESHOLD_BATT_TEMP + TOLERANCE_BATT_TEMP)
 
-#define NUM_CHECKS 3
-#define RISK_LEVEL 2
-
-extern int checkBatteryTemperature(float temp);
-extern int checkBatteryStateOfCharge(float stateOfCharge);
-extern int checkBatteryChargeRate(float chargeRate);
-extern int checkBatteryCondition(float stateOfCharge, float temperature, float chargeRate);
-extern int printStatusOnConsole (const char*);
+extern int checkBatteryCondition(float stateOfCharge, float temp, float chargeRate);
+void printStatusOnConsole(const char* statement);
